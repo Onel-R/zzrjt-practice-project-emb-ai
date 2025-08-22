@@ -17,15 +17,14 @@ def sent_analyzer():
         function. The output returned shows the label and its confidence 
         score for the provided text.
     '''
-    text_T_Analyze = request.args.get('textToAnalyze')
-    response = sentiment_analyzer(text_T_Analyze)
+    text_to_analyze = request.args.get('textToAnalyze')
+    response = sentiment_analyzer(text_to_analyze)
     label = response['label']
     score = response['score']
 
-    if label == None:
+    if label is None:
         return "Invalid input! Try again."
-    else:
-        return "The given text has been identified as {} with a score of {}.".format(label.split('_')[1], score)
+    return f"The given text has been identified as {label.split('_')[1]} with a score of {score}."
 
 @app.route("/")
 def render_index_page():
